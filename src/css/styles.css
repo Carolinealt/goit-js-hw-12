@@ -1,25 +1,250 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-@import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
+/* Убираем внутренние отступы */
+ul,
+ol {
+  padding: 0;
+}
 
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  font-family: sans-serif;
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 1em;
+  text-align: left;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
 
-  color: #242424;
-  background-color: rgba(255, 255, 255, 0.87);
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul,
+ol {
+  list-style: none;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* Наследуем шрифты для инпутов и кнопок */
+form,
+input,
+p,
+button,
+textarea,
+select {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.09em;
+  font: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.loader-container {
+  margin: auto;
+  max-width: 400px
+}
+
+.loader {
+  width: 40px;
+  height: 98px;
+  display: inline-block;
+  position: relative;
+  border: 2px solid #FFF;
+  box-sizing: border-box;
+  color: rgba(255, 61, 0, 0.9);
+  border-radius: 20px 20px 4px 4px;
+  background: #fff;
+  animation: fill 2s linear infinite alternate;
+}
+
+.loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, -95%);
+  border: 2px solid #FFF;
+  border-bottom: none;
+  background: #fff;
+  width: 15px;
+  height: 35px;
+  animation: fillNeck 2s linear infinite alternate;
+}
+
+@keyframes fill {
+  0% {
+    box-shadow: 0 0 inset
+  }
+
+  50%,
+  100% {
+    box-shadow: 0 -98px inset
+  }
+}
+
+
+@keyframes fillNeck {
+
+  0%,
+  50% {
+    box-shadow: 0 0 inset
+  }
+
+  100% {
+    box-shadow: 0 -20px inset
+  }
+}
+
+
+.main-form {
+  text-align: center;
+  margin: 36px;
+}
+
+.main-input {
+  min-width: 272px;
+  border: 1px #808080 solid;
+  max-height: 38px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  display: inline;
+  outline: inherit;
+  color: #2E2F42;
+  transition: border-color 0.15s ease-in;
+}
+
+.main-input::placeholder {
+  color: #808080;
+}
+
+.main-input:hover {
+  border-color: black;
+}
+
+.main-input:focus {
+  border-color: #4E75FF;
+}
+
+.main-btn {
+  background-color: #4E75FF;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 75px;
+  height: 40px;
+  transition: background-color 0.15s ease-in;
+}
+
+.main-btn:focus,
+.main-btn:hover {
+  background-color: #6C8CFF;
+}
+
+.main-p {
+
+  color: #2E2F42;
+  text-align: center;
+}
+
+.dis-active {
+  display: none;
+}
+
+.active {
+  display: inline;
+}
+
+.gallery {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1128px;
+  margin-bottom: 36px;
+}
+
+.gallery-item {
+  max-width: 100%;
+
+  width: calc((100% - 48px) / 3);
+  outline: #808080 solid 1px;
+}
+
+.image {
+  display: block;
+  height: 155px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.gallery-link {
+  display: inline;
+}
+
+.stats-list {
+  display: flex;
+  height: 48px;
+}
+
+.stats-item {
+  margin: auto;
+
+}
+
+.stats-header {
+  font-family: sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-align: center;
+
+}
+
+.stats-p {
+  font-family: sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  text-align: center;
+
 }
