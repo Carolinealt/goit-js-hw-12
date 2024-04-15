@@ -1,22 +1,30 @@
-const searchParams = new URLSearchParams({
-    key: `21174821-fd3fd6848262c16aee96184b8`,
-    q: '',
-    image_type: `photo`,
-    orientations: `horizontal`,
-    safesearch: true,
+import axios from 'axios';
+
+const myApiKey = `21174821-fd3fd6848262c16aee96184b8`;
+axios.defaults.baseURL = `https://pixabay.com/`;
+let pageGlobal = 1;
+let requestGlobal = '';
+async function fetchImg(request) {
+  if (requestGlobal === request) {
+    pageGlobal += 1;
+  } else {
+    pageGlobal = 1;
+  }
+  // pageGlobal += requestGlobal === request ? +1 : 1;
+  console.log(pageGlobal);
+  const response = await axios.get(`api/`, {
+    params: {
+      key: `${myApiKey}`,
+      q: `${request}`,
+      image_type: `photo`,
+      orientations: `horizontal`,
+      safesearch: true,
+      page: pageGlobal,
+      per_page: 8,
+    },
   });
-  
-  function createUrl(request) {
-    searchParams.set(`q`, `${request}`);
-    return `https://pixabay.com/api/?${searchParams}`;
-  }
-  
-  function fetchImg(request) {
-    return fetch(`${createUrl(request)}`)
-      .then(r => {
-        return r.json();
-      })
-      .catch(e => console.log(e));
-  }
-  
-  export default fetchImg;
+  requestGlobal = request;
+  return response.data;
+}
+
+export default fetchImg;

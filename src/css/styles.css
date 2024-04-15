@@ -182,9 +182,7 @@ button {
   text-align: center;
 }
 
-.dis-active {
-  display: none;
-}
+
 
 .active {
   display: inline;
@@ -247,4 +245,13 @@ button {
   letter-spacing: 0.04em;
   text-align: center;
 
+}
+
+.more-btn {
+  margin: auto;
+  display: block;
+}
+
+.dis-active {
+  display: none;
 }

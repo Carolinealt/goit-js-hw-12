@@ -22,6 +22,11 @@ function fetchRequest(e) {
 
 function createElements(inputValue) {
   gallery.innerHTML = '';
-  let cardArray = fetchImg(inputValue);
+  let cardArray;
+  try {
+    cardArray = fetchImg(inputValue);
+  } catch (error) {
+    console.log(error);
+  }
   addHTML(cardArray);
 }

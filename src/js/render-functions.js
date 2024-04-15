@@ -7,9 +7,10 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   descrLoading: document.querySelector('.main-p'),
   iconLoading: document.querySelector('.loader'),
+  loadMoreBtn: document.querySelector('.more-btn'),
 };
 
-const { gallery, descrLoading, iconLoading } = refs;
+const { gallery, descrLoading, iconLoading, loadMoreBtn } = refs;
 
 function createMarkupElement({
   webformatURL,
@@ -56,6 +57,18 @@ function toggleDescr() {
   iconLoading.classList.toggle('dis-active');
 }
 
+// function toggleLoadBtn() {
+//   loadMoreBtn.classList.toggle('dis-active')
+// }
+
+function hideLoadBtn() {
+  loadMoreBtn.classList.add(`dis-active`);
+}
+
+function showLoadBtn() {
+  loadMoreBtn.classList.remove(`dis-active`);
+}
+
 function addDOM(str) {
   gallery.insertAdjacentHTML('beforeend', str);
 }
@@ -69,12 +82,13 @@ function addLightBox() {
   box.refresh();
 }
 
-function getPromise(prom) {
-  return prom
+async function getPromise(prom) {
+  return await prom
     .then(({ hits }) => {
       if (hits.length === 0) {
         throw new Error();
       }
+      hideLoadBtn();
       toggleDescr();
       return hits;
     })
@@ -84,6 +98,7 @@ function getPromise(prom) {
     .then(joinArr)
     .then(addDOM)
     .then(addLightBox)
+    .then(showLoadBtn)
     .catch(() => {
       const options = {
         message:
@@ -100,9 +115,11 @@ function getPromise(prom) {
     });
 }
 
-function addHTML(prom) {
+async function addHTML(prom) {
+  hideLoadBtn();
   toggleDescr();
-  getPromise(prom);
+  await getPromise(prom);
+  showLoadBtn()
 }
 
 export default addHTML;
