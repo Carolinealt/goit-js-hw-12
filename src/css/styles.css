@@ -250,6 +250,7 @@ button {
 .more-btn {
   margin: auto;
   display: block;
+  margin-bottom: 25px;
 }
 
 .dis-active {

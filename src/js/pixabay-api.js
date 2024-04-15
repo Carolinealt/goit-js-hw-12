@@ -10,7 +10,7 @@ async function fetchImg(request) {
   } else {
     pageGlobal = 1;
   }
-  // pageGlobal += requestGlobal === request ? +1 : 1;
+  // pageGlobal = requestGlobal === request ? +1 : 1; 
   console.log(pageGlobal);
   const response = await axios.get(`api/`, {
     params: {
@@ -20,7 +20,7 @@ async function fetchImg(request) {
       orientations: `horizontal`,
       safesearch: true,
       page: pageGlobal,
-      per_page: 8,
+      per_page: 15,
     },
   });
   requestGlobal = request;

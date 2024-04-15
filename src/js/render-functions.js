@@ -9,6 +9,7 @@ const refs = {
   iconLoading: document.querySelector('.loader'),
   loadMoreBtn: document.querySelector('.more-btn'),
 };
+const box = new SimpleLightbox('.gallery-link');
 
 const { gallery, descrLoading, iconLoading, loadMoreBtn } = refs;
 
@@ -57,10 +58,6 @@ function toggleDescr() {
   iconLoading.classList.toggle('dis-active');
 }
 
-// function toggleLoadBtn() {
-//   loadMoreBtn.classList.toggle('dis-active')
-// }
-
 function hideLoadBtn() {
   loadMoreBtn.classList.add(`dis-active`);
 }
@@ -74,12 +71,10 @@ function addDOM(str) {
 }
 
 function addLightBox() {
-  const box = new SimpleLightbox('.gallery-link');
   const a = document.querySelectorAll('.gallery-link');
   a.forEach(element => {
     element.SimpleLightbox;
   });
-  box.refresh();
 }
 
 async function getPromise(prom) {
@@ -88,8 +83,9 @@ async function getPromise(prom) {
       if (hits.length === 0) {
         throw new Error();
       }
-      hideLoadBtn();
+      showLoadBtn();
       toggleDescr();
+
       return hits;
     })
     .then(hits => {
@@ -98,7 +94,9 @@ async function getPromise(prom) {
     .then(joinArr)
     .then(addDOM)
     .then(addLightBox)
-    .then(showLoadBtn)
+    .then(() => {
+      box.refresh();
+    })
     .catch(() => {
       const options = {
         message:
@@ -118,8 +116,8 @@ async function getPromise(prom) {
 async function addHTML(prom) {
   hideLoadBtn();
   toggleDescr();
+
   await getPromise(prom);
-  showLoadBtn()
 }
 
 export default addHTML;
