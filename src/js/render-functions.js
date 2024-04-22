@@ -80,12 +80,8 @@ function addLightBox() {
 async function getPromise(prom) {
   return await prom
     .then(({ hits }) => {
-      if (hits.length === 0) {
-        throw new Error();
-      }
       showLoadBtn();
       toggleDescr();
-
       return hits;
     })
     .then(hits => {
@@ -98,18 +94,7 @@ async function getPromise(prom) {
       box.refresh();
     })
     .catch(() => {
-      const options = {
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
-        backgroundColor: `#EF4040`,
-        messageColor: 'white',
-        messageSize: `16`,
-        position: 'topRight',
-        messageLineHeight: `88`,
-        class: `ipa`,
-      };
       toggleDescr();
-      iziToast.error(options);
     });
 }
 

@@ -1,3 +1,4 @@
+import iziToast from 'izitoast';
 import fetchImg from './js/pixabay-api';
 import addHTML from './js/render-functions';
 
@@ -22,7 +23,10 @@ function fetchFirstRequest(e) {
 }
 
 function fetchMoreRequest() {
-  createElements(form.elements.request.value);
+  try {
+    createElements(form.elements.request.value);
+  } catch (error) {}
+
   smothing();
 }
 
@@ -30,10 +34,11 @@ function createElements(inputValue) {
   let cardArray;
   try {
     cardArray = fetchImg(inputValue);
+
+    addHTML(cardArray);
   } catch (error) {
     console.log(error);
   }
-  addHTML(cardArray);
 }
 
 async function smothing() {
