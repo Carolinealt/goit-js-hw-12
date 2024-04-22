@@ -80,7 +80,11 @@ function addLightBox() {
 async function getPromise(prom) {
   return await prom
     .then(({ hits }) => {
-      showLoadBtn();
+      if (hits.length === 15) {
+        toggleDescr();
+        showLoadBtn();
+        return hits;
+      }
       toggleDescr();
       return hits;
     })

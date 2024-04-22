@@ -7,11 +7,12 @@ let pageGlobal = 0;
 let requestGlobal = '';
 let limit = 15;
 let totalPages = null;
-let loadMoreBtn = document.querySelector('more-btn');
+let loadMoreBtn = document.querySelector('.more-btn');
 let loader = document.querySelector(`.loader-container`);
 function checkContentQuantity(num) {
   totalPages = Math.ceil(num / limit);
 }
+
 async function fetchImg(request) {
   if (requestGlobal === request) {
     pageGlobal += 1;
@@ -31,6 +32,7 @@ async function fetchImg(request) {
     },
   });
 
+  loadMoreBtn.classList.add('dis-active');
   checkContentQuantity(response.data.totalHits);
   if (response.data.totalHits === 0) {
     const options = {
@@ -51,7 +53,6 @@ async function fetchImg(request) {
       message: "We're sorry, there are no more posts to load",
     });
     loader.classList.add(`dis-active`);
-    loadMoreBtn.disactive;
   }
   requestGlobal = request;
   return response.data;
